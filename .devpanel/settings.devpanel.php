@@ -5,6 +5,8 @@
  * DevPanel Drupal settings overrides.
  */
 
+use Symfony\Component\HttpFoundation\Request;
+
 $databases['default']['default']['database'] = getenv('DB_NAME');
 $databases['default']['default']['username'] = getenv('DB_USER');
 $databases['default']['default']['password'] = getenv('DB_PASSWORD');
@@ -22,6 +24,7 @@ if (!empty($realpath)) {
   $settings['file_private_path'] = $realpath;
 }
 $settings['trusted_host_patterns'][] = getenv('DP_HOSTNAME') ?: '.*';
+$settings['testing_package_manager'] = TRUE;
 
 // When running in a development container, trust reverse proxy headers.
 if (getenv('DRUPALFORGE_DEVCONTAINER') && isset($_SERVER['HTTP_X_FORWARDED_HOST'], $_SERVER['REMOTE_ADDR'])) {
